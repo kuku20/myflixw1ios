@@ -1,45 +1,42 @@
 //
-//  MovieDetailsViewController.swift
+//  MovieGirdDetailsViewController.swift
 //  myflix
 //
-//  Created by Luu, Loc on 9/13/21.
+//  Created by Luu, Loc on 9/17/21.
 //
 
 import UIKit
-import AlamofireImage
-class MovieDetailsViewController: UIViewController {
-    
-    var movie: [String:Any]!
+
+class MovieGirdDetailsViewController: UIViewController {
+    var movie : [String:Any]!
     
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
+    
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var synopsisLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var sysnopsisLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        //print out the titile to the console to test
         print(movie["title"])
-        
+        // Do any additional setup after loading the view.
         titleLabel.text = movie["title"] as? String
         titleLabel.sizeToFit()
-        
-        synopsisLabel.text = movie["overview"] as? String
-        synopsisLabel.sizeToFit()
-        
+        sysnopsisLabel.text = movie["overview"] as? String
+        sysnopsisLabel.sizeToFit()
         dateLabel.text = movie["release_date"] as? String
         dateLabel.sizeToFit()
         
         let baseUrl = "https://image.tmdb.org/t/p/w185/"
-        let postePpath = movie["poster_path"] as! String
+        guard let postePpath = movie["poster_path"] as? String else {
+            print("problem getting path/URL")
+            return }
         let posterUrl = URL(string: baseUrl + postePpath)
 
         posterView.af.setImage(withURL: posterUrl!)
-        
-        let backdropPpath = movie["backdrop_path"] as! String
+        //use guard to handle the nil
+        guard let backdropPpath = movie["backdrop_path"] as? String else { return }
         let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780/" + backdropPpath)
                 
         backdropView.af.setImage(withURL: backdropUrl!)

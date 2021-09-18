@@ -41,7 +41,6 @@ class MovieGridViewController: UIViewController , UICollectionViewDataSource, UI
                     // TODO: Store the movies in a property to use elsewhere
                     // TODO: Reload your table view data
                 self.movies = dataDictionary["results"] as! [[String:Any]]
-                print(self.movies)
                 //repeat call
                 self.collectionView.reloadData()
                

@@ -26,7 +26,7 @@ class WebViewController: UIViewController , WKUIDelegate{
       print(videos)
         let tupleArray: [(String, Any)] = videos.flatMap { $0 }
         let dictonary = Dictionary(tupleArray, uniquingKeysWith: { (first, last) in last })
-        let myURL = URL(string:"https://www.youtube.com/watch?v=\(dictonary["key"]!)")
+        let myURL = URL(string:"https://www.youtube.com/watch?v=\(dictonary["key"]?? 000)")
                 let myRequest = URLRequest(url: myURL!)
                 webView.load(myRequest)
         /*

@@ -23,12 +23,31 @@ class WebViewController: UIViewController , WKUIDelegate{
         super.viewDidLoad()
         
       print("Hi")
-      print(videos)
-        let tupleArray: [(String, Any)] = videos.flatMap { $0 }
-        let dictonary = Dictionary(tupleArray, uniquingKeysWith: { (first, last) in last })
-        let myURL = URL(string:"https://www.youtube.com/watch?v=\(dictonary["key"]?? 000)")
+        print(videos.count)
+        for i in videos{
+            let type = i["type"]!
+            if type as! String == "Trailer"{
+               // let key = i["key"]!
+                let myURL = URL(string:"https://www.youtube.com/watch?v=\(i["key"]!)")
                 let myRequest = URLRequest(url: myURL!)
                 webView.load(myRequest)
+                break
+            }
+            else{
+                let myURL = URL(string:"https://www.youtube.com/")
+                let myRequest = URLRequest(url: myURL!)
+                webView.load(myRequest)
+            }
+        }
+       // let key = videos[0]["type"] as! String
+       // let tupleArray: [(String, Any)] = videos.flatMap { $0 }
+      //  let dictonary = Dictionary(tupleArray, uniquingKeysWith: { (first, last) in last })
+        //print(dictonary)
+        
+        //print(key)
+       // let myURL = URL(string:"https://www.youtube.com/watch?v=\(dictonary["key"]!)")
+            //    let myRequest = URLRequest(url: myURL!)
+             //   webView.load(myRequest)
         /*
         goback.addTarget(self, action: #selector(self.onClick(sender:)), for: .touchUpInside)
          */
